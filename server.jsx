@@ -19,7 +19,6 @@ app.use((req, res) => {
 
   match({ routes, location}, (err, redirectLocation, renderProps) => {
     if(err){
-      console.error(err)
       return res.status(500).end('Internal Server Error')
     }
 
@@ -34,7 +33,6 @@ app.use((req, res) => {
     )
 
     const initialState = store.getState()
-    console.log(initialState)
     const componentHTML = renderToString(InitialComponent)
 
     const HTML = `
@@ -48,7 +46,7 @@ app.use((req, res) => {
           </script>
         </head>
         <body>
-          <div id="react-view">${componentHTML}</div>
+          <div id="react-view"><div>${componentHTML}</div></div>
           <script type="application/javascript" src="/bundle.js"></script>
         </body>
       </html>

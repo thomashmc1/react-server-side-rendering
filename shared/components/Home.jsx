@@ -13,8 +13,8 @@ export default class Home extends React.Component {
 
         return (
           <div id='todo-list'>
-            <TodosView tools={todos} {...bindActionCreators(TodoActions, dispatch)} />
-            <TodosForm tools={todos} {...bindActionCreators(TodoActions, dispatch)} />
+            <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)} />
+            <TodosForm todos={todos} {...bindActionCreators(TodoActions, dispatch)} />
           </div>
         )
     }

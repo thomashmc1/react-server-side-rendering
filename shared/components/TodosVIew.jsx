@@ -2,9 +2,9 @@ import React from 'react';
 export default class TodosView extends React.Component {
   handleDelete = (e) => {
     const id = Number(e.target.dataset.id);
-    
+    console.log(this.props)
     // Equivalent to `dispatch(deleteTodo())`
-    this.props.deleteTodo(id);
+    this.props.deleteToDo(id);
   }
   handleEdit = (e) => {
     const id  = Number(e.target.dataset.id);
@@ -15,12 +15,12 @@ export default class TodosView extends React.Component {
     this.props.editTodo(id, newVal);
   }
  
-  render() {
+  render() {    
+    var todoItems = null
 
-    var click = null
-    console.log('to do list', this.props)
     if(this.props.todos){
-      click = this.props.todos.map( (todo, index) => {
+      todoItems = this.props.todos.map( (todo, index) => {
+        console.log(todo)
         return (
           <div key={index}>
             <span>{todo}</span>
@@ -38,7 +38,7 @@ export default class TodosView extends React.Component {
 
     return (
       <div id="todo-list">
-        <click />
+        {todoItems}
       </div>
     )
   }

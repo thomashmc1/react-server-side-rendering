@@ -16,8 +16,8 @@ export function editTodo(id, text){
 }
 
 export function deleteToDo(id){
-  return (
+  return {
     type: 'DELETE_TODO',
     id
-  )
+  }
 }
