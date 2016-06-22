@@ -9,7 +9,6 @@ webpackConfig.entry = [
   './client'
 ]
 
-console.log(path.join(__dirname, '/dist'))
 //app output path and name
 webpackConfig.output = {
   path: path.join(__dirname, '/dist'),
@@ -18,7 +17,7 @@ webpackConfig.output = {
 
 
 webpackConfig.resolve = {
-  modulesDirectories: ['node_modules', 'shared'],
+  modulesDirectories: ['node_modules', 'client'],
   extensions: ['', '.js', '.jsx']
 }
 

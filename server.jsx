@@ -4,18 +4,19 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router'
 import createLocation from 'history/lib/createLocation'
-import routes from 'routes'
+import routes from './client/routes'
 import { createStore, combineReducers} from 'redux'
 import { Provider } from 'react-redux'
-import * as reducers from 'reducers'
-
+import * as reducers from './client/reducers'
+import { applyMiddleware } from 'redux'
+import promiseMiddleware from './client/lib/promiseMiddleware'
 
 const app = express();
 
 app.use((req, res) => {
   const location = createLocation(req.url)
   const reducer = combineReducers(reducers)
-  const store = createStore(reducer)
+  const store = applyMiddleware(promiseMiddleware)(createStore)(reducer)
 
   match({ routes, location}, (err, redirectLocation, renderProps) => {
     if(err){
@@ -25,7 +26,7 @@ app.use((req, res) => {
     if(!renderProps){
       return res.status(404).end('Not Found')
     }
-    
+
     const InitialComponent = (
       <Provider store={store}>
         <RoutingContext {...renderProps} />

@@ -6,16 +6,21 @@ export default class TodosView extends React.Component {
     // Equivalent to `dispatch(deleteTodo())`
     this.props.deleteToDo(id);
   }
+
   handleEdit = (e) => {
     const id  = Number(e.target.dataset.id);
     const val = this.props.todos.get(id).text
-    
+
     // For cutting edge UX
     let newVal = window.prompt('', val);
     this.props.editTodo(id, newVal);
   }
- 
-  render() {    
+
+  componentWillMount() {
+      this.props.getTodo()
+  }
+
+  render() {
     var todoItems = null
 
     if(this.props.todos){
@@ -24,7 +29,7 @@ export default class TodosView extends React.Component {
         return (
           <div key={index}>
             <span>{todo}</span>
-          
+
             <button data-id={index} onClick={this.handleDelete}>
               X
             </button>
